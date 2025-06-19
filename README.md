@@ -31,7 +31,7 @@ The FASTQ Agent System breaks down complex FASTQ analysis into specialized, AI-p
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/lfaller/fastq-agent-system
 cd fastq-agent-system
 ```
 
@@ -242,7 +242,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 If you encounter any issues or have questions:
 
 1. Check the [Troubleshooting](#🛡️-troubleshooting) section
-2. Look through existing [Issues](https://github.com/your-username/fastq-agent-system/issues)
+2. Look through existing [Issues](https://github.com/lfaller/fastq-agent-system/issues)
 3. Create a new issue with a detailed description
 
 ---
