@@ -11,10 +11,8 @@ from ..models.reports import (
     AnalysisReport,
     QualityAssessment,
     QualityFlags,
-    RecommendationItem,
     ReportFormat,
     ReportSection,
-    ReportTemplate,
 )
 from .base import BaseAgent
 
@@ -471,7 +469,7 @@ Return only valid JSON, no markdown formatting or code blocks."""
     ) -> None:
         """Save report as HTML using Jinja2 template."""
         try:
-            from jinja2 import BaseLoader, Environment, Template
+            from jinja2 import BaseLoader, Environment
 
             # For now, use the embedded template to avoid file path issues
             template_content = self._get_embedded_html_template()

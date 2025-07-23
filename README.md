@@ -13,12 +13,15 @@ The FASTQ Agent System breaks down complex FASTQ analysis into specialized, AI-p
 
 ## 🚀 Features
 
-- Multi-agent architecture using Claude API
-- FASTQ file parsing and quality analysis
-- Rich CLI interface with beautiful output
-- Comprehensive quality reports with recommendations
-- Extensible agent framework
-- Type-safe code with Pydantic models
+- **Multi-agent architecture** using Claude API for intelligent analysis
+- **Comprehensive FASTQ parsing** with BioPython integration
+- **AI-powered quality assessment** and recommendations
+- **Beautiful report generation** in multiple formats (HTML, JSON, Markdown)
+- **Rich CLI interface** with colorful output and progress indicators
+- **Quality scoring and flagging** with automated issue detection
+- **Processing recommendations** for downstream analysis optimization
+- **Extensible agent framework** for adding new analysis capabilities
+- **Type-safe code** with Pydantic models and comprehensive validation
 
 ## 📋 Requirements
 
@@ -31,7 +34,7 @@ The FASTQ Agent System breaks down complex FASTQ analysis into specialized, AI-p
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/lfaller/fastq-agent-system
+git clone https://github.com/YOUR_USERNAME/fastq-agent-system.git
 cd fastq-agent-system
 ```
 
@@ -76,11 +79,31 @@ poetry run fastq-analyze hello
 
 You should see a welcome message confirming the setup is working.
 
-### Analyze a FASTQ File (Coming Soon)
+### Generate Analysis Reports
+
+The main feature is generating comprehensive analysis reports for FASTQ files:
 
 ```bash
-# This will be implemented in the next development phase
-poetry run fastq-analyze analyze path/to/your/file.fastq
+# Generate an HTML report (opens automatically in browser)
+poetry run fastq-analyze generate-report tests/fixtures/sample.fastq --open
+
+# Generate different formats
+poetry run fastq-analyze generate-report path/to/your/file.fastq --format html
+poetry run fastq-analyze generate-report path/to/your/file.fastq --format json
+poetry run fastq-analyze generate-report path/to/your/file.fastq --format markdown
+
+# Specify custom output directory
+poetry run fastq-analyze generate-report path/to/your/file.fastq --output-dir ./my_reports --format html --open
+```
+
+### Test the Parser (Development)
+
+```bash
+# Test the FASTQ parser with sample data
+poetry run fastq-analyze test-parser
+
+# Test with your own FASTQ file
+poetry run fastq-analyze test-parser --fastq-file path/to/your/file.fastq
 ```
 
 ## 📁 Project Structure
@@ -167,27 +190,45 @@ All agents inherit from `BaseAgent` which provides:
 5. **Coordinator**: Orchestrates the workflow and handles agent communication
 6. **Output**: Quality analysis report with recommendations
 
-## 📊 Current Status
+## 📊 Report Formats
 
-**✅ Completed:**
-- Project structure and configuration
-- Poetry setup with all dependencies
-- Base agent class implementation
-- CLI framework with Rich formatting
-- Development tooling (pre-commit, testing, linting)
+### HTML Reports
+- **Professional styling** with modern CSS and responsive design
+- **Quality assessment badges** with color-coded ratings
+- **Interactive metrics dashboard** showing key statistics
+- **AI-generated insights** and recommendations
+- **Quality issue flagging** with detailed explanations
 
-**🚧 In Progress:**
-- Agent implementations (parser, analyzer, reporter, coordinator)
-- FASTQ file handling and parsing
-- Quality metrics calculation
-- Report generation
+### JSON Reports
+- **Machine-readable format** for integration with other tools
+- **Complete analysis data** including all metrics and recommendations
+- **API-friendly structure** for programmatic access
 
-**📋 Planned:**
-- Multi-agent orchestration
-- Advanced quality analysis algorithms
-- Customizable report templates
-- Batch processing capabilities
-- Web interface
+### Markdown Reports
+- **Human-readable format** perfect for documentation
+- **Version control friendly** for tracking analysis changes
+- **Easy integration** with documentation systems
+
+## 🔧 Available Commands
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `hello` | Test installation and show welcome message | `poetry run fastq-analyze hello` |
+| `generate-report` | Create comprehensive analysis report | `poetry run fastq-analyze generate-report file.fastq --format html --open` |
+| `test-parser` | Test FASTQ parsing with sample data | `poetry run fastq-analyze test-parser` |
+| `debug-env` | Debug environment variable loading | `poetry run fastq-analyze debug-env` |
+
+### Report Generation Options
+
+```bash
+poetry run fastq-analyze generate-report [FASTQ_FILE] [OPTIONS]
+
+Options:
+  --output-dir TEXT     Output directory for reports [default: ./reports]
+  --format TEXT         Report format: html, json, markdown [default: html]
+  --open               Open HTML report in browser automatically
+  --help               Show help message and exit
+```
 
 ## 🛡️ Troubleshooting
 
@@ -242,7 +283,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 If you encounter any issues or have questions:
 
 1. Check the [Troubleshooting](#🛡️-troubleshooting) section
-2. Look through existing [Issues](https://github.com/lfaller/fastq-agent-system/issues)
+2. Look through existing [Issues](https://github.com/YOUR_USERNAME/fastq-agent-system/issues)
 3. Create a new issue with a detailed description
 
 ---

@@ -82,7 +82,7 @@ def generate_report(
             )
 
             summary = report_result["summary"]
-            console.print(f"\n[bold]Analysis Summary:[/bold]")
+            console.print("\n[bold]Analysis Summary:[/bold]")
             console.print(f"  Quality Assessment: {summary['quality_assessment']}")
             console.print(
                 f"  Total Recommendations: {summary['total_recommendations']}"
@@ -146,7 +146,7 @@ def test_parser(
             for key, value in summary.items():
                 console.print(f"  {key.replace('_', ' ').title()}: {value}")
 
-            console.print(f"\n[bold]AI Analysis:[/bold]")
+            console.print("\n[bold]AI Analysis:[/bold]")
             console.print(result["llm_analysis"])
         else:
             console.print(
