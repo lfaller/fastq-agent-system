@@ -87,6 +87,9 @@ The main feature is generating comprehensive analysis reports for FASTQ files:
 # Generate an HTML report (opens automatically in browser)
 poetry run fastq-analyze generate-report tests/fixtures/sample.fastq --open
 
+# Fast mode for quick analysis (5-10x faster, template-based insights)
+poetry run fastq-analyze generate-report path/to/your/file.fastq --fast --open
+
 # Generate different formats
 poetry run fastq-analyze generate-report path/to/your/file.fastq --format html
 poetry run fastq-analyze generate-report path/to/your/file.fastq --format json
@@ -95,6 +98,8 @@ poetry run fastq-analyze generate-report path/to/your/file.fastq --format markdo
 # Specify custom output directory
 poetry run fastq-analyze generate-report path/to/your/file.fastq --output-dir ./my_reports --format html --open
 ```
+
+**Performance**: Small datasets (< 50 reads) automatically use fast analysis (~0.5 seconds). Larger datasets can use `--fast` flag for 5-10x speedup.
 
 ### Test the Parser (Development)
 

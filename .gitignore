@@ -1,5 +1,6 @@
 # reports
 reports/
+benchmark_reports/
 
 # Python
 __pycache__/
