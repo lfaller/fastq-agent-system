@@ -8,6 +8,7 @@ from Bio import SeqIO
 
 from ..models.fastq_data import FASTQData, FASTQRead
 from .base import BaseAgent
+from .decorators import handle_agent_errors
 
 
 class FASTQParserAgent(BaseAgent):
@@ -24,6 +25,7 @@ class FASTQParserAgent(BaseAgent):
             "patterns you notice."
         )
 
+    @handle_agent_errors
     async def process(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
         """Process a FASTQ file and return parsed data with metrics."""
         file_path = input_data.get("file_path")
@@ -34,45 +36,35 @@ class FASTQParserAgent(BaseAgent):
 
         self.log(f"Starting to parse FASTQ file: {file_path}")
 
-        try:
-            # Parse the FASTQ file
-            fastq_data = self._parse_fastq_file(file_path)
+        # Parse the FASTQ file
+        fastq_data = self._parse_fastq_file(file_path)
 
-            # Calculate metrics
-            metrics = fastq_data.calculate_metrics()
+        # Calculate metrics
+        metrics = fastq_data.calculate_metrics()
 
-            # Use LLM to analyze the basic statistics and flag issues (unless fast mode)
-            if fast_mode or metrics.total_reads < 50:
-                # Skip AI analysis for small datasets or fast mode
-                llm_analysis = f"Successfully parsed {metrics.total_reads} reads. Average quality: {metrics.average_quality:.2f}. No detailed analysis in fast mode."
-                self.log("Skipping AI analysis for fast processing")
-            else:
-                # Use LLM to analyze the basic statistics and flag issues
-                analysis_prompt = self._create_analysis_prompt(fastq_data)
-                llm_analysis = await self.query_llm(analysis_prompt)
+        # Use LLM to analyze the basic statistics and flag issues (unless fast mode)
+        if fast_mode or metrics.total_reads < 50:
+            # Skip AI analysis for small datasets or fast mode
+            llm_analysis = f"Successfully parsed {metrics.total_reads} reads. Average quality: {metrics.average_quality:.2f}. No detailed analysis in fast mode."
+            self.log("Skipping AI analysis for fast processing")
+        else:
+            # Use LLM to analyze the basic statistics and flag issues
+            analysis_prompt = self._create_analysis_prompt(fastq_data)
+            llm_analysis = await self.query_llm(analysis_prompt)
 
-            self.log(f"Successfully parsed {metrics.total_reads} reads")
+        self.log(f"Successfully parsed {metrics.total_reads} reads")
 
-            return {
-                "fastq_data": fastq_data,
-                "parsing_status": "success",
-                "llm_analysis": llm_analysis,
-                "summary": {
-                    "total_reads": metrics.total_reads,
-                    "average_quality": round(metrics.average_quality, 2),
-                    "average_length": round(metrics.average_read_length, 2),
-                    "gc_content": round(metrics.gc_content, 2),
-                },
-            }
-
-        except Exception as e:
-            self.log(f"Error parsing FASTQ file: {e}", "ERROR")
-            return {
-                "fastq_data": None,
-                "parsing_status": "error",
-                "error_message": str(e),
-                "llm_analysis": None,
-            }
+        return {
+            "fastq_data": fastq_data,
+            "parsing_status": "success",
+            "llm_analysis": llm_analysis,
+            "summary": {
+                "total_reads": metrics.total_reads,
+                "average_quality": round(metrics.average_quality, 2),
+                "average_length": round(metrics.average_read_length, 2),
+                "gc_content": round(metrics.gc_content, 2),
+            },
+        }
 
     def _parse_fastq_file(self, file_path: Union[str, Path]) -> FASTQData:
         """Parse a FASTQ file using BioPython."""
