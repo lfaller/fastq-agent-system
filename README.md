@@ -175,6 +175,57 @@ poetry add package_name
 poetry add --group dev package_name
 ```
 
+### Version Management
+
+The project uses a **single source of truth** for versioning in `pyproject.toml`. The version is automatically propagated throughout the codebase using `importlib.metadata`.
+
+#### Bumping the Version
+
+Use Poetry's built-in version command (recommended):
+
+```bash
+# Bump patch version (0.4.0 -> 0.4.1)
+poetry version patch
+
+# Bump minor version (0.4.0 -> 0.5.0)
+poetry version minor
+
+# Bump major version (0.4.0 -> 1.0.0)
+poetry version major
+
+# Set specific version
+poetry version 1.2.3
+```
+
+After bumping the version:
+
+```bash
+# Verify the new version
+poetry version
+
+# Commit the change
+git add pyproject.toml
+git commit -m "chore: bump version to $(poetry version -s)"
+```
+
+**Important Notes:**
+- ✅ **DO** use `poetry version` command to update the version
+- ✅ **DO** only change version in `pyproject.toml`
+- ❌ **DON'T** manually edit `__version__` in Python files
+- ❌ **DON'T** add version definitions in submodules
+
+The pre-commit hook will automatically verify that no duplicate version definitions exist in the codebase.
+
+#### Checking Current Version
+
+```bash
+# From command line
+poetry version
+
+# From Python code
+poetry run python -c "import fastq_agents; print(fastq_agents.__version__)"
+```
+
 ## 🤖 Agent Architecture
 
 ### Base Agent Class
