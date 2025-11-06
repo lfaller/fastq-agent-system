@@ -661,9 +661,11 @@ JSON only, no markdown:"""
                 else str(report.quality_assessment)
             )
 
-            # Render template
+            # Render template with version from package metadata
+            from .. import __version__
+
             html_content = template.render(
-                report=report, quality_value=quality_value, version="0.3.0"
+                report=report, quality_value=quality_value, version=__version__
             )
 
             output_path.write_text(html_content, encoding="utf-8")
