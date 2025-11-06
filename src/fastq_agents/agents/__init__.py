@@ -1,5 +1,4 @@
-"""FASTQ Agent System - Multi-agent system for FASTQ file quality analysis."""
+"""FASTQ Agent implementations for FASTQ file quality analysis."""
 
-__version__ = "0.2.0"
-__author__ = "Lina Faller"
-__email__ = "lina.faller@gmail.com"
+# Note: Version is defined in the parent package (src/fastq_agents/__init__.py)
+# and should not be duplicated here.

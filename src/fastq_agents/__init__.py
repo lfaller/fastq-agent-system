@@ -1,6 +1,6 @@
 """FASTQ Agent System - Multi-agent system for FASTQ file quality analysis."""
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 __author__ = "Lina L Faller"
 __email__ = "Lina.Faller@gmail.com"
 
