@@ -29,3 +29,12 @@ repos:
     hooks:
       - id: mypy
         additional_dependencies: [types-requests]
+
+  - repo: local
+    hooks:
+      - id: check-version-consistency
+        name: Check version consistency
+        entry: poetry run python scripts/check_version_consistency.py
+        language: system
+        pass_filenames: false
+        always_run: true

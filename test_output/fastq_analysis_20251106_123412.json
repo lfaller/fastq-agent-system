@@ -1,0 +1,176 @@
+{
+  "report_id": "22cba716-e1fe-4664-a6b1-4d142bc8f57c",
+  "generated_at": "2025-11-06T12:34:12.783066",
+  "file_path": "tests/fixtures/sample.fastq",
+  "file_size_mb": 0.0,
+  "metrics": {
+    "total_reads": 5,
+    "total_bases": 360,
+    "average_read_length": 72.0,
+    "min_read_length": 72,
+    "max_read_length": 72,
+    "average_quality": 38.37222222222222,
+    "gc_content": 51.11111111111111,
+    "quality_distribution": {
+      "40-44": 326,
+      "20-24": 6,
+      "35-39": 3,
+      "30-34": 4,
+      "25-29": 10,
+      "10-14": 5,
+      "5-9": 3,
+      "0-4": 1,
+      "15-19": 2
+    },
+    "length_distribution": {
+      "50-99": 5
+    }
+  },
+  "quality_assessment": "excellent",
+  "quality_flags": {
+    "low_quality_reads": false,
+    "uneven_read_lengths": false,
+    "poor_gc_content": false,
+    "adapter_contamination": false,
+    "overrepresented_sequences": false,
+    "low_complexity_regions": false
+  },
+  "recommendations": [
+    {
+      "category": "Adapter Trimming",
+      "priority": "medium",
+      "action": "Trim adapter sequences",
+      "reason": "Standard preprocessing step for Illumina sequencing data",
+      "parameters": {
+        "tool": "trimmomatic",
+        "adapter_file": "TruSeq3-PE.fa"
+      }
+    }
+  ],
+  "ai_summary": "This FASTQ dataset contains 5 reads with exceptional quality with minimal issues. Average quality score is 38.4 and GC content is 51.1%.",
+  "ai_insights": [
+    "Excellent base call quality indicates reliable sequencing data",
+    "GC content within ideal range suggests no major bias",
+    "Consistent read lengths indicate uniform library preparation"
+  ],
+  "chart_data": {
+    "quality_distribution": {
+      "type": "bar",
+      "title": "Quality Score Distribution",
+      "data": {
+        "labels": [
+          "40-44",
+          "20-24",
+          "35-39",
+          "30-34",
+          "25-29",
+          "10-14",
+          "5-9",
+          "0-4",
+          "15-19"
+        ],
+        "values": [
+          326,
+          6,
+          3,
+          4,
+          10,
+          5,
+          3,
+          1,
+          2
+        ]
+      }
+    },
+    "length_distribution": {
+      "type": "histogram",
+      "title": "Read Length Distribution",
+      "data": {
+        "labels": [
+          "50-99"
+        ],
+        "values": [
+          5
+        ]
+      }
+    },
+    "summary_metrics": {
+      "type": "metrics",
+      "title": "Summary Statistics",
+      "data": {
+        "Total Reads": "5",
+        "Total Bases": "360",
+        "Avg Quality": "38.37",
+        "GC Content": "51.1%",
+        "Avg Length": "72.0 bp"
+      }
+    }
+  },
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "content": "\n            <div class=\"summary-section\">\n                <h3>Quality Assessment: Excellent</h3>\n                <p>This FASTQ dataset contains 5 reads with exceptional quality with minimal issues. Average quality score is 38.4 and GC content is 51.1%.</p>\n                <p><strong>Recommendations:</strong> 1 processing steps suggested, \n                   0 high priority.</p>\n            </div>\n            ",
+      "charts": [],
+      "subsections": []
+    },
+    {
+      "title": "Dataset Overview",
+      "content": "\n            <div class=\"overview-section\">\n                <table class=\"metrics-table\">\n                    <tr><td>File</td><td>sample.fastq</td></tr>\n                    <tr><td>Total Reads</td><td>5</td></tr>\n                    <tr><td>Total Bases</td><td>360</td></tr>\n                    <tr><td>File Size</td><td>0.0 MB</td></tr>\n                    <tr><td>Average Quality</td><td>38.37</td></tr>\n                    <tr><td>GC Content</td><td>51.1%</td></tr>\n                </table>\n            </div>\n            ",
+      "charts": [
+        {
+          "type": "metrics",
+          "title": "Summary Statistics",
+          "data": {
+            "Total Reads": "5",
+            "Total Bases": "360",
+            "Avg Quality": "38.37",
+            "GC Content": "51.1%",
+            "Avg Length": "72.0 bp"
+          }
+        }
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Quality Analysis",
+      "content": "\n        <div class=\"quality-section\">\n            <h4>Quality Issues:</h4>\n            <p>No significant quality issues detected.</p>\n            \n            <h4>Quality Metrics:</h4>\n            <ul>\n                <li>Average Quality Score: 38.37</li>\n                <li>Read Length Range: 72-72 bp</li>\n                <li>GC Content: 51.1%</li>\n            </ul>\n        </div>\n        ",
+      "charts": [
+        {
+          "type": "bar",
+          "title": "Quality Score Distribution",
+          "data": {
+            "labels": [
+              "40-44",
+              "20-24",
+              "35-39",
+              "30-34",
+              "25-29",
+              "10-14",
+              "5-9",
+              "0-4",
+              "15-19"
+            ],
+            "values": [
+              326,
+              6,
+              3,
+              4,
+              10,
+              5,
+              3,
+              1,
+              2
+            ]
+          }
+        }
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Processing Recommendations",
+      "content": "<div class='recommendations-section'><h4>Recommended Actions:</h4><ul><li><strong>Trim adapter sequences</strong>: Standard preprocessing step for Illumina sequencing data</li></ul></div>",
+      "charts": [],
+      "subsections": []
+    }
+  ]
+}
