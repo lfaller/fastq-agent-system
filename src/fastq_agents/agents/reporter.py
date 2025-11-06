@@ -16,6 +16,7 @@ from ..models.reports import (
     ReportSection,
 )
 from .base import BaseAgent
+from .decorators import handle_agent_errors
 
 
 class FASTQReportAgent(BaseAgent):
@@ -62,6 +63,7 @@ class FASTQReportAgent(BaseAgent):
             "their downstream analysis results."
         )
 
+    @handle_agent_errors
     async def process(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
         """Generate a comprehensive analysis report."""
         fastq_data = input_data.get("fastq_data")
@@ -76,44 +78,32 @@ class FASTQReportAgent(BaseAgent):
         if fast_mode:
             self.log("Fast mode enabled - skipping detailed AI analysis")
 
-        try:
-            # Generate the analysis report
-            report = await self._create_analysis_report(fastq_data, fast_mode)
+        # Generate the analysis report
+        report = await self._create_analysis_report(fastq_data, fast_mode)
 
-            # Generate charts data
-            chart_data = self._generate_chart_data(fastq_data)
-            report.chart_data = chart_data
+        # Generate charts data
+        chart_data = self._generate_chart_data(fastq_data)
+        report.chart_data = chart_data
 
-            # Create report sections
-            sections = await self._create_report_sections(report)
-            report.sections = sections
+        # Create report sections
+        sections = await self._create_report_sections(report)
+        report.sections = sections
 
-            # Save the report
-            output_path = await self._save_report(report, output_dir, report_format)
+        # Save the report
+        output_path = await self._save_report(report, output_dir, report_format)
 
-            self.log(f"Report generated successfully: {output_path}")
+        self.log(f"Report generated successfully: {output_path}")
 
-            return {
-                "report": report,
-                "output_path": str(output_path),
-                "status": "success",
-                "summary": {
-                    "quality_assessment": report.quality_assessment,
-                    "total_recommendations": len(report.recommendations),
-                    "high_priority_issues": len(
-                        report.get_high_priority_recommendations()
-                    ),
-                },
-            }
-
-        except Exception as e:
-            self.log(f"Error generating report: {e}", "ERROR")
-            return {
-                "report": None,
-                "output_path": None,
-                "status": "error",
-                "error_message": str(e),
-            }
+        return {
+            "report": report,
+            "output_path": str(output_path),
+            "status": "success",
+            "summary": {
+                "quality_assessment": report.quality_assessment,
+                "total_recommendations": len(report.recommendations),
+                "high_priority_issues": len(report.get_high_priority_recommendations()),
+            },
+        }
 
     async def _create_analysis_report(
         self, fastq_data: FASTQData, fast_mode: bool = False
